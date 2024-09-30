@@ -21,7 +21,7 @@ const data = [
   },
 ];
 
-const CountCharts = () => {
+const CountChart = () => {
   return (
     <div className="bg-white rounded-xl w-full h-full p-4">
       {/* TITLE */}
@@ -68,4 +68,4 @@ const CountCharts = () => {
   );
 };
 
-export default CountCharts;
+export default CountChart;
