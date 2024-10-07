@@ -1,9 +1,9 @@
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { eventsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
 
 type Event = {
   id: number;
@@ -17,7 +17,6 @@ type Event = {
 const columns = [
   { header: "Title", accessor: "title" },
   { header: "Class", accessor: "class" },
-  { header: "Score", accessor: "score", className: "hidden md:table-cell" },
   {
     header: "Date",
     accessor: "date",
@@ -52,15 +51,11 @@ const EventListPage = () => {
       <td className="hidden md:table-cell">{item.endTime}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-jotiSky">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-jotiPurple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="attendance" type="update" data={item} />
+              <FormModal table="attendance" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -81,11 +76,7 @@ const EventListPage = () => {
             <button className="h-8 w-8 flex items-center justify-center rounded-full bg-jotiYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <button className="h-8 w-8 flex items-center justify-center rounded-full bg-jotiYellow">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
-            )}
+            {role === "admin" && <FormModal table="attendance" type="create" />}
           </div>
         </div>
       </div>

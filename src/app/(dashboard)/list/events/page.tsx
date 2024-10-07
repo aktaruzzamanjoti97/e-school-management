@@ -17,7 +17,6 @@ type Event = {
 const columns = [
   { header: "Title", accessor: "title" },
   { header: "Class", accessor: "class" },
-  { header: "Score", accessor: "score", className: "hidden md:table-cell" },
   {
     header: "Date",
     accessor: "date",

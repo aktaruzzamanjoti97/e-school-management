@@ -1,9 +1,9 @@
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { resultsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
 
 type Result = {
   id: number;
@@ -55,15 +55,11 @@ const ResultListPage = () => {
       <td className="hidden md:table-cell">{item.date}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-jotiSky">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-jotiPurple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="result" type="update" data={item} />
+              <FormModal table="result" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -85,9 +81,10 @@ const ResultListPage = () => {
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-              <button className="h-8 w-8 flex items-center justify-center rounded-full bg-jotiYellow">
-                <Image src="/plus.png" alt="" width={14} height={14} />
-              </button>
+              // <button className="h-8 w-8 flex items-center justify-center rounded-full bg-jotiYellow">
+              //   <Image src="/plus.png" alt="" width={14} height={14} />
+              // </button>
+              <FormModal table="result" type="create" />
             )}
           </div>
         </div>
